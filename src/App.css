@@ -1,0 +1,15 @@
+.styleLink {
+  text-decoration: none;
+  color: black;
+}
+
+.styleLinkHome {
+  text-decoration: none;
+  color: black;
+  display: flex;
+}
+
+.arrows {
+  font-size: 3rem;
+  color: black;
+}

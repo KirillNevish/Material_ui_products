@@ -1,0 +1,19 @@
+.gohome {
+    font-size: 1.9rem;
+    color: black;
+
+}
+
+#openmenu {
+    display: none;
+}
+
+@media(max-width:576px) {
+    #Headerpc {
+        display: none !important;
+    }
+
+    #openmenu {
+        display: block;
+    }
+}
