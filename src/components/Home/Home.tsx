@@ -2,6 +2,8 @@ import Footer from '../Footer/Footer'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons'
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons'
+import { faChevronUp } from '@fortawesome/free-solid-svg-icons'
+import { faChevronDown } from '@fortawesome/free-solid-svg-icons'
 import Container from '@mui/material/Container'
 import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button';
@@ -169,13 +171,42 @@ function Home() {
         <>
             <Container sx={{ mt: 2, border: "2px solid black", borderRadius: "15px", boxShadow: 10 }}>
                 <Typography variant="h1" sx={{ mt: 2 }}>Products</Typography>
-                <Paper elevation={1} variant='contained' sx={{ mt: 2, display: "flex", justifyContent: "center", gap: 4, flexDirection: { xs: "row", md: "row" }, bgcolor: "primary.main", mb: 3, alignItems: "center" }}>
-                    <IconButton onClick={handlePreviousProduct} aria-label="previous">
+                <Paper elevation={1} variant='contained' sx={{
+                    mt: 2,
+                    display: "flex",
+                    justifyContent: "center",
+                    gap: 4,
+                    flexDirection: { xs: "column", md: "row" },
+                    bgcolor: "primary.main",
+                    mb: 3,
+                    alignItems: "center"
+                }}>
+                    {/* <IconButton onClick={handlePreviousProduct} aria-label="previous">
+                        <FontAwesomeIcon icon={faChevronLeft} className="arrows" />
+                    </IconButton> */}
+                    {/* Arrow button for previous product */}
+                    <IconButton onClick={handlePreviousProduct} aria-label="previous" sx={{ display: { xs: 'block', md: 'none' } }}>
+                        <FontAwesomeIcon icon={faChevronUp} className="arrows" />
+                    </IconButton>
+
+                    {/* Hidden arrows for larger screens */}
+                    <IconButton onClick={handlePreviousProduct} aria-label="previous" sx={{ display: { xs: 'none', md: 'block' } }}>
                         <FontAwesomeIcon icon={faChevronLeft} className="arrows" />
                     </IconButton>
 
                     {renderCard(products[currentIndex])}
-                    <IconButton onClick={handleNextProduct} aria-label="next">
+                    {/* <IconButton onClick={handleNextProduct} aria-label="next">
+                        <FontAwesomeIcon icon={faChevronRight} className="arrows" />
+                    </IconButton> */}
+
+                    {/* Arrow button for next product */}
+                    <IconButton onClick={handleNextProduct} aria-label="next" sx={{ display: { xs: 'block', md: 'none' }, mt: 2 }}>
+                        <FontAwesomeIcon icon={faChevronDown} className="arrows" />
+                    </IconButton>
+
+
+
+                    <IconButton onClick={handleNextProduct} aria-label="next" sx={{ display: { xs: 'none', md: 'block' } }}>
                         <FontAwesomeIcon icon={faChevronRight} className="arrows" />
                     </IconButton>
 
