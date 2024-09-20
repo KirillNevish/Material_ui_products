@@ -12,6 +12,7 @@ import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
+import { grey } from '@mui/material/colors';
 
 
 
@@ -45,20 +46,38 @@ function Header() {
             <List>
 
                 <ListItem disablePadding>
-                    <ListItemButton sx={{ display: "flex", flexDirection: "column", alignItems: "start", justifyContent: "start", gap: 2 }}>
+                    <ListItemButton disableRipple sx={{ display: "flex", flexDirection: "column", alignItems: "start", justifyContent: "start", gap: 2 }}>
 
-                        <Typography variant="h2" sx={{ fontSize: "2rem", color: "black" }}>
+                        <Typography variant="h2" sx={{
+                            fontSize: "2rem",
+                            color: "black",
+                            textShadow: '2px 2px 4px rgba(0, 0, 0, 0.3)',
+                            transition: 'color 0.3s ease-in-out, text-shadow 0.3s ease-in-out',
+                            "&:hover": { color: grey[900], textShadow: '2px 2px 6px rgba(0, 0, 0, 0.5)' }
+                        }}>
                             <Link to="/" className="styleLinkHome" >
                                 Home
                             </Link>
                         </Typography>
 
-                        <Typography variant="h2" sx={{ fontSize: "2rem", color: "black", whiteSpace: "nowrap" }}>
+                        <Typography variant="h2" sx={{
+                            fontSize: "2rem", color: "black",
+                            whiteSpace: "nowrap",
+                            textShadow: '2px 2px 4px rgba(0, 0, 0, 0.3)',
+                            transition: 'color 0.3s ease-in-out, text-shadow 0.3s ease-in-out',
+                            "&:hover": { color: grey[900], textShadow: '2px 2px 6px rgba(0, 0, 0, 0.5)' }
+                        }}>
                             <Link to="/about" className="styleLink">
                                 About us
                             </Link>
                         </Typography>
-                        <Typography variant="h2" sx={{ fontSize: "2rem", color: "black" }}>
+                        <Typography variant="h2" sx={{
+                            fontSize: "2rem",
+                            color: "black",
+                            textShadow: '2px 2px 4px rgba(0, 0, 0, 0.3)',
+                            transition: 'color 0.3s ease-in-out, text-shadow 0.3s ease-in-out',
+                            "&:hover": { color: grey[900], textShadow: '2px 2px 6px rgba(0, 0, 0, 0.5)' }
+                        }}>
                             <Link to="/service" className="styleLink">
                                 Service
                             </Link>
@@ -96,18 +115,32 @@ function Header() {
                 <Container id={style.Headerpc} maxWidth="lg" sx={{ display: "flex", alignItems: "baseline" }}>
                     <Box sx={{ display: "flex", alignItems: "baseline" }}>
 
-                        <Button variant="outlined" sx={{ display: "flex", alignItems: "baseline" }}>
+                        <Button variant="outlined" disableRipple sx={{ display: "flex", alignItems: "baseline" }}>
                             <Link to="/" className="styleLinkHome" >
                                 <FontAwesomeIcon icon={faHouse} className={style.gohome} />
-                                <Typography variant="h2" sx={{ ml: 1, fontSize: "2rem", color: "black" }}>
+                                <Typography variant="h2" sx={{
+                                    ml: 1,
+                                    fontSize: "2rem",
+                                    color: "black",
+                                    textShadow: '2px 2px 4px rgba(0, 0, 0, 0.3)',
+                                    transition: 'color 0.3s ease-in-out, text-shadow 0.3s ease-in-out',
+                                    "&:hover": { color: grey[900], textShadow: '2px 2px 6px rgba(0, 0, 0, 0.5)' }
+                                }}>
                                     Home
                                 </Typography>
                             </Link>
                         </Button>
                     </Box>
                     <Box sx={{ display: "flex", alignItems: "baseline" }}>
-                        <Button variant="outlined" sx={{ display: "flex" }}>
-                            <Typography variant="h2" sx={{ fontSize: "2rem", color: "black", whiteSpace: "nowrap" }}>
+                        <Button variant="outlined" disableRipple sx={{ display: "flex" }}>
+                            <Typography variant="h2" sx={{
+                                fontSize: "2rem",
+                                color: "black",
+                                whiteSpace: "nowrap",
+                                textShadow: '2px 2px 4px rgba(0, 0, 0, 0.3)',
+                                transition: 'color 0.3s ease-in-out, text-shadow 0.3s ease-in-out',
+                                "&:hover": { color: grey[900], textShadow: '2px 2px 6px rgba(0, 0, 0, 0.5)' }
+                            }}>
                                 <Link to="/about" className="styleLink">
                                     About us
                                 </Link>
@@ -115,8 +148,14 @@ function Header() {
                         </Button>
                     </Box>
                     <Box sx={{ display: "flex", alignItems: "baseline", }}>
-                        <Button variant="outlined">
-                            <Typography variant="h2" sx={{ fontSize: "2rem", color: "black" }}>
+                        <Button variant="outlined" disableRipple>
+                            <Typography variant="h2" sx={{
+                                fontSize: "2rem",
+                                color: "black",
+                                textShadow: '2px 2px 4px rgba(0, 0, 0, 0.3)',
+                                transition: 'color 0.3s ease-in-out, text-shadow 0.3s ease-in-out',
+                                "&:hover": { color: grey[900], textShadow: '2px 2px 6px rgba(0, 0, 0, 0.5)' }
+                            }}>
                                 <Link to="/service" className="styleLink">
                                     Service
                                 </Link>

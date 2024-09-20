@@ -74,13 +74,6 @@ function Home() {
         },
     ];
 
-
-
-
-
-
-
-
     useEffect(() => {
 
         localStorage.setItem('likedCards', JSON.stringify(likedCards));
@@ -181,10 +174,7 @@ function Home() {
                     mb: 3,
                     alignItems: "center"
                 }}>
-                    {/* <IconButton onClick={handlePreviousProduct} aria-label="previous">
-                        <FontAwesomeIcon icon={faChevronLeft} className="arrows" />
-                    </IconButton> */}
-                    {/* Arrow button for previous product */}
+
                     <IconButton onClick={handlePreviousProduct} aria-label="previous" sx={{ display: { xs: 'block', md: 'none' } }}>
                         <FontAwesomeIcon icon={faChevronUp} className="arrows" />
                     </IconButton>
@@ -195,9 +185,7 @@ function Home() {
                     </IconButton>
 
                     {renderCard(products[currentIndex])}
-                    {/* <IconButton onClick={handleNextProduct} aria-label="next">
-                        <FontAwesomeIcon icon={faChevronRight} className="arrows" />
-                    </IconButton> */}
+
 
                     {/* Arrow button for next product */}
                     <IconButton onClick={handleNextProduct} aria-label="next" sx={{ display: { xs: 'block', md: 'none' }, mt: 2 }}>
