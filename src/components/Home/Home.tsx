@@ -6,7 +6,9 @@ import { faChevronUp } from '@fortawesome/free-solid-svg-icons'
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons'
 import Container from '@mui/material/Container'
 import Typography from '@mui/material/Typography'
+import { TextField } from '@mui/material';
 import Button from '@mui/material/Button';
+import { Box } from '@mui/material'
 import { Paper } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import React, { useState, useEffect } from 'react';
@@ -22,19 +24,19 @@ import ShareIcon from '@mui/icons-material/Share';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import "../../App"
 
+const ExpandMore = styled((props) => {
+    const { expand, ...other } = props;
+    return <IconButton {...other} />;
+})(({ theme, expand }) => ({
+    transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
+    marginLeft: 'auto',
+    transition: theme.transitions.create('transform', {
+        duration: theme.transitions.duration.shortest,
+    }),
+}));
+
 
 function Home() {
-
-    const ExpandMore = styled((props) => {
-        const { expand, ...other } = props;
-        return <IconButton {...other} />;
-    })(({ theme, expand }) => ({
-        transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
-        marginLeft: 'auto',
-        transition: theme.transitions.create('transform', {
-            duration: theme.transitions.duration.shortest,
-        }),
-    }));
 
 
     const [expanded, setExpanded] = useState({});
@@ -46,6 +48,7 @@ function Home() {
     });
 
     const [currentIndex, setCurrentIndex] = useState(0);
+    const [searchQuery, setSearchQuery] = useState('');
 
     const products = [
         {
@@ -158,12 +161,19 @@ function Home() {
         </Card>
     );
 
+    const filteredLikedCards = likedCards.filter((title) =>
+        title.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+
 
 
     return (
         <>
             <Container sx={{ mt: 2, border: "2px solid black", borderRadius: "15px", boxShadow: 10 }}>
-                <Typography variant="h1" sx={{ mt: 2 }}>Products</Typography>
+                <Box sx={{ display: "flex", justifyContent: { xs: "center", md: "start" } }}>
+                    <Typography variant="h1" sx={{ mt: 2 }}>Products</Typography>
+                </Box>
+
                 <Paper elevation={1} variant='contained' sx={{
                     mt: 2,
                     display: "flex",
@@ -199,10 +209,49 @@ function Home() {
                     </IconButton>
 
                 </Paper>
-                <Typography variant="h1" sx={{ mt: 2 }}>Liked</Typography>
+                <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexDirection: { xs: "column", md: "row" } }}>
+                    <Typography variant="h1" sx={{ mt: 2 }}>Liked</Typography>
+                    <TextField
+                        variant="outlined"
+                        size="small"
+                        placeholder="Search liked products..."
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                        sx={{
+                            mt: 2,
+                            borderRadius: "15px",
+                            border: "2px solid black",
+                            boxShadow: 10,
+                            transition: "all 0.5s ease-in-out",
+                            bgcolor: "primary.main",
+                            '& .MuiOutlinedInput-root': {
+                                borderRadius: "10px",
+                                '& fieldset': {
+                                    borderColor: 'black',
+                                },
+                                '&:hover fieldset': {
+                                    borderColor: 'black',
+                                },
+                                '&.Mui-focused fieldset': {
+                                    borderColor: 'black',
+                                },
+                            },
+                            '& .MuiInputBase-input': {
+                                color: 'black',
+                                '&::placeholder': {
+                                    color: 'black',
+                                },
+                                '&:focus::placeholder': {
+                                    color: 'black',
+                                },
+                            },
+                        }}
+                    />
+                </Box>
+
                 <Paper id="secProducts" elevation={1} variant='contained' sx={{ mt: 2, display: "flex", justifyContent: "center", alignItems: "center", gap: 4, flexWrap: "wrap", bgcolor: "primary.main", mb: 3 }}>
 
-                    {likedCards.length === 0 ? (
+                    {/* {likedCards.length === 0 ? (
                         <Typography variant="h6" color="text.secondary">
                             None added yet
                         </Typography>
@@ -212,7 +261,18 @@ function Home() {
                             return likedProduct ? renderCard(likedProduct) : null;
                         })
                     )
-                    }
+                    } */}
+
+                    {filteredLikedCards.length === 0 ? (
+                        <Typography variant="h6" color="text.secondary">
+                            None added yet
+                        </Typography>
+                    ) : (
+                        filteredLikedCards.map((title) => {
+                            const likedProduct = products.find((product) => product.title === title);
+                            return likedProduct ? renderCard(likedProduct) : null;
+                        })
+                    )}
 
                 </Paper>
             </Container >
