@@ -1,11 +1,14 @@
 import React from 'react';
-import { Container, Typography, Paper } from '@mui/material';
+import { Container, Typography, Paper, Box } from '@mui/material';
 
 function About() {
     return (
         <>
             <Container sx={{ mt: 2, border: "2px solid black", borderRadius: "15px", boxShadow: 10 }}>
-                <Typography variant="h1" sx={{ mt: 2 }}>About us</Typography>
+                <Box sx={{ display: "flex", justifyContent: { xs: "center", md: "start" } }}>
+                    <Typography variant="h1" sx={{ mt: 2 }}>About us</Typography>
+                </Box>
+
                 <Paper elevation={1} variant='contained' sx={{ mt: 2, display: "flex", justifyContent: "space-between", gap: 4, flexDirection: { xs: "column", md: "row" }, bgcolor: "primary.main", mb: 3, alignItems: "center" }}>
                     <Typography variant="h2" component="h2">
                         We are a team of experienced developers who specialize in building cutting-edge web applications.

@@ -1,17 +1,9 @@
-import Footer from '../Footer/Footer'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faChevronLeft } from '@fortawesome/free-solid-svg-icons'
-import { faChevronRight } from '@fortawesome/free-solid-svg-icons'
-import { faChevronUp } from '@fortawesome/free-solid-svg-icons'
-import { faChevronDown } from '@fortawesome/free-solid-svg-icons'
-import Container from '@mui/material/Container'
-import Typography from '@mui/material/Typography'
-import { TextField } from '@mui/material';
-import Button from '@mui/material/Button';
-import { Box } from '@mui/material'
+
+import React, { useState } from 'react';
+import Container from '@mui/material/Container';
+import Typography from '@mui/material/Typography';
+import TextField from '@mui/material/TextField';
 import { Paper } from '@mui/material';
-import { styled } from '@mui/material/styles';
-import React, { useState, useEffect } from 'react';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
@@ -19,12 +11,11 @@ import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
 import Collapse from '@mui/material/Collapse';
 import IconButton from '@mui/material/IconButton';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import ShareIcon from '@mui/icons-material/Share';
+import { styled } from '@mui/material/styles';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { grey } from '@mui/material/colors';
-import { Link } from 'react-router-dom';
-import "../../App"
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import Box from '@mui/material/Box';
+import Footer from "../Footer/Footer";
 
 
 const ExpandMore = styled((props) => {
@@ -37,21 +28,13 @@ const ExpandMore = styled((props) => {
         duration: theme.transitions.duration.shortest,
     }),
 }));
-
-
-function Home() {
-
-
+function AllProducts() {
     const [expanded, setExpanded] = useState({});
-
+    const [searchQuery, setSearchQuery] = useState('');
     const [likedCards, setLikedCards] = useState(() => {
-
         const savedLikedCards = localStorage.getItem('likedCards');
         return savedLikedCards ? JSON.parse(savedLikedCards) : [];
     });
-
-    const [currentIndex, setCurrentIndex] = useState(0);
-    const [searchQuery, setSearchQuery] = useState('');
 
     const products = [
         {
@@ -80,13 +63,6 @@ function Home() {
         },
     ];
 
-    useEffect(() => {
-
-        localStorage.setItem('likedCards', JSON.stringify(likedCards));
-    }, [likedCards]);
-
-
-
     const handleExpandClick = (title) => {
         setExpanded((prevState) => ({
             ...prevState,
@@ -97,10 +73,8 @@ function Home() {
     const handleFavoriteClick = (cardTitle) => {
         setLikedCards((prevLikedCards) => {
             if (prevLikedCards.includes(cardTitle)) {
-
                 return prevLikedCards.filter((title) => title !== cardTitle);
             } else {
-
                 return [...prevLikedCards, cardTitle];
             }
         });
@@ -108,20 +82,15 @@ function Home() {
 
     const isFavorite = (cardTitle) => likedCards.includes(cardTitle);
 
-    const handleNextProduct = () => {
-        setCurrentIndex((prevIndex) => (prevIndex + 1) % products.length);
-    };
-    const handlePreviousProduct = () => {
-        setCurrentIndex((prevIndex) =>
-            prevIndex === 0 ? products.length - 1 : prevIndex - 1
-        );
-    };
+    const filteredProducts = products.filter((product) =>
+        product.title.toLowerCase().includes(searchQuery.toLowerCase())
+    );
 
     const renderCard = (product) => (
         <Card
             key={product.title}
             sx={{
-                maxWidth: 345,
+                width: 345,
                 transition: 'transform 0.3s ease-in-out',
                 borderRadius: '15px',
                 '&:hover': {
@@ -164,71 +133,13 @@ function Home() {
         </Card>
     );
 
-    const filteredLikedCards = likedCards.filter((title) =>
-        title.toLowerCase().includes(searchQuery.toLowerCase())
-    );
-
-
 
     return (
         <>
             <Container sx={{ mt: 2, border: "2px solid black", borderRadius: "15px", boxShadow: 10 }}>
-                <Box id="ProductTitle" sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                    <Typography variant="h1" sx={{ mt: 2, textShadow: '2px 2px 4px rgba(0, 0, 0, 0.3)' }}>Products</Typography>
+                <Box id="ProductTitle" sx={{ display: "flex", justifyContent: { xs: "center", md: "space-between" }, alignItems: "center", flexDirection: { xs: "column", md: "row" } }}>
+                    <Typography variant="h1" sx={{ mt: 2, textShadow: '2px 2px 4px rgba(0, 0, 0, 0.3)' }}> All Products</Typography>
 
-                    <Typography id="ViewAll" variant="h2" sx={{
-                        mt: 2,
-                        fontSize: "2rem",
-                        color: "black",
-                        whiteSpace: "nowrap",
-                        textShadow: '2px 2px 4px rgba(0, 0, 0, 0.3)',
-                        transition: 'color 0.3s ease-in-out, text-shadow 0.3s ease-in-out',
-                        "&:hover": { color: grey[900], textShadow: '2px 2px 6px rgba(0, 0, 0, 0.5)' }
-                    }}>
-                        <Link to="/allproducts" className="styleLink">
-                            View all
-                        </Link>
-                    </Typography>
-
-                </Box>
-
-                <Paper elevation={1} variant='contained' sx={{
-                    mt: 2,
-                    display: "flex",
-                    justifyContent: "center",
-                    gap: 4,
-                    flexDirection: { xs: "column", md: "row" },
-                    bgcolor: "primary.main",
-                    mb: 3,
-                    alignItems: "center"
-                }}>
-
-                    <IconButton onClick={handlePreviousProduct} aria-label="previous" sx={{ display: { xs: 'block', md: 'none' } }}>
-                        <FontAwesomeIcon icon={faChevronUp} className="arrows" />
-                    </IconButton>
-
-                    {/* Hidden arrows for larger screens */}
-                    <IconButton onClick={handlePreviousProduct} aria-label="previous" sx={{ display: { xs: 'none', md: 'block' } }}>
-                        <FontAwesomeIcon icon={faChevronLeft} className="arrows" />
-                    </IconButton>
-
-                    {renderCard(products[currentIndex])}
-
-
-                    {/* Arrow button for next product */}
-                    <IconButton onClick={handleNextProduct} aria-label="next" sx={{ display: { xs: 'block', md: 'none' }, mt: 2 }}>
-                        <FontAwesomeIcon icon={faChevronDown} className="arrows" />
-                    </IconButton>
-
-
-
-                    <IconButton onClick={handleNextProduct} aria-label="next" sx={{ display: { xs: 'none', md: 'block' } }}>
-                        <FontAwesomeIcon icon={faChevronRight} className="arrows" />
-                    </IconButton>
-
-                </Paper>
-                <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexDirection: { xs: "column", md: "row" } }}>
-                    <Typography variant="h1" sx={{ mt: 2, textShadow: '2px 2px 4px rgba(0, 0, 0, 0.3)' }}>Liked</Typography>
                     <TextField
                         variant="outlined"
                         size="small"
@@ -265,38 +176,37 @@ function Home() {
                             },
                         }}
                     />
+
                 </Box>
 
-                <Paper id="secProducts" elevation={1} variant='contained' sx={{ mt: 2, display: "flex", justifyContent: "center", alignItems: "center", gap: 4, flexWrap: "wrap", bgcolor: "primary.main", mb: 3 }}>
+                <Paper elevation={1} variant='contained' sx={{
+                    mt: 2,
+                    display: "flex",
+                    justifyContent: "center",
+                    gap: 4,
+                    flexWrap: "wrap",
+                    flexDirection: { xs: "column", md: "row" },
+                    bgcolor: "primary.main",
+                    mb: 3,
+                    alignItems: "center"
+                }}>
 
-                    {/* {likedCards.length === 0 ? (
+                    {filteredProducts.length === 0 ? (
                         <Typography variant="h6" color="text.secondary">
-                            None added yet
+                            No products found.
                         </Typography>
                     ) : (
-                        likedCards.map((title) => {
-                            const likedProduct = products.find((product) => product.title === title);
-                            return likedProduct ? renderCard(likedProduct) : null;
-                        })
-                    )
-                    } */}
-
-                    {filteredLikedCards.length === 0 ? (
-                        <Typography variant="h6" color="text.secondary">
-                            None added yet
-                        </Typography>
-                    ) : (
-                        filteredLikedCards.map((title) => {
-                            const likedProduct = products.find((product) => product.title === title);
-                            return likedProduct ? renderCard(likedProduct) : null;
-                        })
+                        filteredProducts.map((product) => renderCard(product))
                     )}
 
+
+
                 </Paper>
+
             </Container >
             <Footer />
         </>
     );
 }
 
-export default Home;
+export default AllProducts;

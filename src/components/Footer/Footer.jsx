@@ -18,7 +18,7 @@ function Footer() {
 
 
 
-                        <Typography variant="h2" sx={{ ml: 1, fontSize: { xs: "1rem", md: "1.5rem" }, color: "black", alignItems: "baseline" }}>
+                        <Typography variant="h2" sx={{ ml: 1, fontSize: { xs: "1rem", md: "1.5rem" }, color: "black", alignItems: "baseline", textShadow: '2px 2px 4px rgba(0, 0, 0, 0.3)' }}>
                             © {nowDate} Company, Inc
                         </Typography>
 

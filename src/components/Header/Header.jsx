@@ -67,6 +67,18 @@ function Header() {
                             transition: 'color 0.3s ease-in-out, text-shadow 0.3s ease-in-out',
                             "&:hover": { color: grey[900], textShadow: '2px 2px 6px rgba(0, 0, 0, 0.5)' }
                         }}>
+                            <Link to="/allproducts" className="styleLink">
+                                View all
+                            </Link>
+                        </Typography>
+
+                        <Typography variant="h2" sx={{
+                            fontSize: "2rem", color: "black",
+                            whiteSpace: "nowrap",
+                            textShadow: '2px 2px 4px rgba(0, 0, 0, 0.3)',
+                            transition: 'color 0.3s ease-in-out, text-shadow 0.3s ease-in-out',
+                            "&:hover": { color: grey[900], textShadow: '2px 2px 6px rgba(0, 0, 0, 0.5)' }
+                        }}>
                             <Link to="/about" className="styleLink">
                                 About us
                             </Link>
