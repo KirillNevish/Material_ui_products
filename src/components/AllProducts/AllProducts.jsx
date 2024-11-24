@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
@@ -31,6 +31,7 @@ const ExpandMore = styled((props) => {
 function AllProducts() {
     const [expanded, setExpanded] = useState({});
     const [searchQuery, setSearchQuery] = useState('');
+
     const [likedCards, setLikedCards] = useState(() => {
         const savedLikedCards = localStorage.getItem('likedCards');
         return savedLikedCards ? JSON.parse(savedLikedCards) : [];
@@ -62,6 +63,11 @@ function AllProducts() {
             method: `Preheat oven to 375°F (190°C). Roll out pie dough and place in a pie dish. Fill with sliced apples mixed with sugar, cinnamon, nutmeg, and lemon juice. Cover with top crust and seal edges. Cut slits in the top for steam to escape. Bake for 50-60 minutes until golden brown. Let cool before serving.`,
         },
     ];
+
+    useEffect(() => {
+
+        localStorage.setItem('likedCards', JSON.stringify(likedCards));
+    }, [likedCards]);
 
     const handleExpandClick = (title) => {
         setExpanded((prevState) => ({
