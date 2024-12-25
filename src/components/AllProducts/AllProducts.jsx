@@ -96,7 +96,7 @@ function AllProducts() {
         <Card
             key={product.title}
             sx={{
-                width: 345,
+                maxWidth: 345,
                 transition: 'transform 0.3s ease-in-out',
                 borderRadius: '15px',
                 '&:hover': {
