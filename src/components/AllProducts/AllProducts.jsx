@@ -149,7 +149,7 @@ function AllProducts() {
                     <TextField
                         variant="outlined"
                         size="small"
-                        placeholder="Search liked products..."
+                        placeholder="Search products..."
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
                         sx={{
