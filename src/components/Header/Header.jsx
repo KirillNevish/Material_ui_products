@@ -128,7 +128,7 @@ function Header() {
                     <Box sx={{ display: "flex", alignItems: "baseline" }}>
 
                         <Button variant="outlined" disableRipple sx={{ display: "flex", alignItems: "baseline" }}>
-                            <Link to="/" className="styleLinkHome" >
+                            <Link to="/" className="styleLinkHome">
                                 <FontAwesomeIcon icon={faHouse} className={style.gohome} />
                                 <Typography variant="h2" sx={{
                                     ml: 1,

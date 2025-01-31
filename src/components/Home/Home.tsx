@@ -11,7 +11,7 @@ import Button from '@mui/material/Button';
 import { Box } from '@mui/material'
 import { Paper } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
@@ -38,6 +38,15 @@ const ExpandMore = styled((props) => {
     }),
 }));
 
+const shuffleArray = (array) => {
+    let shuffled = [...array];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
+};
+
 
 function Home() {
 
@@ -53,7 +62,7 @@ function Home() {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [searchQuery, setSearchQuery] = useState('');
 
-    const products = [
+    const products = useMemo(() => shuffleArray([
         {
             title: 'Shrimp and Chorizo Paella',
             image: 'paella.jpg',
@@ -78,7 +87,7 @@ function Home() {
             description: 'Classic apple pie with a flaky crust and spiced apple filling. Perfect for dessert with a scoop of vanilla ice cream.',
             method: `Preheat oven to 375°F (190°C). Roll out pie dough and place in a pie dish. Fill with sliced apples mixed with sugar, cinnamon, nutmeg, and lemon juice. Cover with top crust and seal edges. Cut slits in the top for steam to escape. Bake for 50-60 minutes until golden brown. Let cool before serving.`,
         },
-    ];
+    ]), []);
 
     useEffect(() => {
 
@@ -268,18 +277,6 @@ function Home() {
                 </Box>
 
                 <Paper id="secProducts" elevation={1} variant='contained' sx={{ mt: 2, display: "flex", justifyContent: "center", alignItems: "center", gap: 4, flexWrap: "wrap", bgcolor: "primary.main", mb: 3 }}>
-
-                    {/* {likedCards.length === 0 ? (
-                        <Typography variant="h6" color="text.secondary">
-                            None added yet
-                        </Typography>
-                    ) : (
-                        likedCards.map((title) => {
-                            const likedProduct = products.find((product) => product.title === title);
-                            return likedProduct ? renderCard(likedProduct) : null;
-                        })
-                    )
-                    } */}
 
                     {filteredLikedCards.length === 0 ? (
                         <Typography variant="h6" color="text.secondary">
